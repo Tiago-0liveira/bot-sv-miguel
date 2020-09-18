@@ -69,7 +69,7 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
                 });
                 channel.members.map(function (member) { return member.voice.setMute(!muted); });
                 muted = !muted;
-                isMuting = false;
+                setTimeout(function () { return (isMuting = false); }, 2000);
             }
         }
         else if (msg.content === "boi") {

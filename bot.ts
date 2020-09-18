@@ -31,7 +31,7 @@ client.on("message", async (msg: Discord.Message) => {
 			});
 			channel.members.map((member) => member.voice.setMute(!muted));
 			muted = !muted;
-			isMuting = false;
+			setTimeout(() => (isMuting = false), 2000);
 		}
 	} else if (msg.content === "boi") {
 		console.log(msg.mentions);
