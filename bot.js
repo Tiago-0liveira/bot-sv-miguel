@@ -46,37 +46,56 @@ client.on("ready", function () {
     console.log("Logged in as " + client.user.tag + "!");
 });
 client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, function () {
-    var channel, member;
-    return __generator(this, function (_a) {
-        if (!msg.content.startsWith(prefix) || msg.author.bot) {
-            return [2 /*return*/];
-        }
-        else {
-            msg.content = msg.content.replace(prefix + " ", "");
-        }
-        if (msg.content === "setChannel") {
-            if (msg.content.split(" ").length >= 1) {
-                console.log(msg.content.split(" ")[1]);
-                baseChannelId = msg.content.split(" ")[1];
-            }
-        }
-        else if (msg.content === "togglemute") {
-            if (!isMuting && msg.channel.id === "756649778481463326") {
+    var channel, _a, _b, _i, member;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                if (!msg.content.startsWith(prefix) || msg.author.bot) {
+                    return [2 /*return*/];
+                }
+                else {
+                    msg.content = msg.content.replace(prefix + " ", "");
+                }
+                if (!(msg.content === "setChannel")) return [3 /*break*/, 1];
+                if (msg.content.split(" ").length >= 1) {
+                    console.log(msg.content.split(" ")[1]);
+                    baseChannelId = msg.content.split(" ")[1];
+                }
+                return [3 /*break*/, 8];
+            case 1:
+                if (!(msg.content === "togglemute")) return [3 /*break*/, 7];
+                if (!(!isMuting && msg.channel.id === "756649778481463326")) return [3 /*break*/, 6];
                 isMuting = true;
                 channel = msg.guild.channels.cache.find(function (c) {
                     return String(c.id) === baseChannelId;
                 });
-                for (member in channel.members) {
-                    channel.members[member].voice.setMute(!muted);
-                }
+                _a = [];
+                for (_b in channel.members)
+                    _a.push(_b);
+                _i = 0;
+                _c.label = 2;
+            case 2:
+                if (!(_i < _a.length)) return [3 /*break*/, 5];
+                member = _a[_i];
+                return [4 /*yield*/, channel.members[member].voice.setMute(!muted)];
+            case 3:
+                _c.sent();
+                _c.label = 4;
+            case 4:
+                _i++;
+                return [3 /*break*/, 2];
+            case 5:
                 muted = !muted;
                 isMuting = false;
-            }
+                _c.label = 6;
+            case 6: return [3 /*break*/, 8];
+            case 7:
+                if (msg.content === "boi") {
+                    console.log(msg.mentions);
+                }
+                _c.label = 8;
+            case 8: return [2 /*return*/];
         }
-        else if (msg.content === "boi") {
-            console.log(msg.mentions);
-        }
-        return [2 /*return*/];
     });
 }); });
 client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.xBw13ZN7CWz9G3yWAHS2V5cT7os");

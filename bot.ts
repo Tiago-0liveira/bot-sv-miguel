@@ -29,7 +29,7 @@ client.on("message", async (msg: Discord.Message) => {
 				return String(c.id) === baseChannelId;
 			});
 			for (let member in channel.members) {
-				channel.members[member].voice.setMute(!muted);
+				await channel.members[member].voice.setMute(!muted);
 			}
 			muted = !muted;
 			isMuting = false;
