@@ -4,6 +4,7 @@ const client = new Discord.Client();
 const prefix: string = "among";
 let baseChannelId: string = "732717388226756639";
 let muted: boolean = false;
+let isMuting: boolean = false;
 
 client.on("ready", () => {
 	console.log(`Logged in as ${client.user.tag}!`);
@@ -22,15 +23,19 @@ client.on("message", async (msg: Discord.Message) => {
 			baseChannelId = msg.content.split(" ")[1];
 		}
 	} else if (msg.content === "togglemute") {
-		const channel = msg.guild.channels.cache.find((c) => {
-			console.log(String(c.id) === baseChannelId);
-			return String(c.id) === baseChannelId;
-		});
-		channel.members.map((member) => member.voice.setMute(!muted));
-		muted = !muted;
+		if (!isMuting && msg.channel.id === "756649778481463326") {
+			isMuting = true;
+			const channel = msg.guild.channels.cache.find((c) => {
+				console.log(String(c.id) === baseChannelId);
+				return String(c.id) === baseChannelId;
+			});
+			channel.members.map((member) => member.voice.setMute(!muted));
+			muted = !muted;
+			isMuting = false;
+		}
 	} else if (msg.content === "boi") {
 		console.log(msg.mentions);
 	}
 });
 
-client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.DSJG0WX0nQDCviy2o5yQ87ywzA4");
+client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.n1CgrnDvNpJ51AESONSZuuRwPmk");

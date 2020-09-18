@@ -41,6 +41,7 @@ var client = new Discord.Client();
 var prefix = "among";
 var baseChannelId = "732717388226756639";
 var muted = false;
+var isMuting = false;
 client.on("ready", function () {
     console.log("Logged in as " + client.user.tag + "!");
 });
@@ -60,12 +61,16 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
             }
         }
         else if (msg.content === "togglemute") {
-            channel = msg.guild.channels.cache.find(function (c) {
-                console.log(String(c.id) === baseChannelId);
-                return String(c.id) === baseChannelId;
-            });
-            channel.members.map(function (member) { return member.voice.setMute(!muted); });
-            muted = !muted;
+            if (!isMuting && msg.channel.id === "756649778481463326") {
+                isMuting = true;
+                channel = msg.guild.channels.cache.find(function (c) {
+                    console.log(String(c.id) === baseChannelId);
+                    return String(c.id) === baseChannelId;
+                });
+                channel.members.map(function (member) { return member.voice.setMute(!muted); });
+                muted = !muted;
+                isMuting = false;
+            }
         }
         else if (msg.content === "boi") {
             console.log(msg.mentions);
@@ -73,4 +78,4 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
         return [2 /*return*/];
     });
 }); });
-client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.DSJG0WX0nQDCviy2o5yQ87ywzA4");
+client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.IYvExnOsExbIsnmvM93Ylf50usA");
