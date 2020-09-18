@@ -78,4 +78,4 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
         return [2 /*return*/];
     });
 }); });
-client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.IYvExnOsExbIsnmvM93Ylf50usA");
+client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.xBw13ZN7CWz9G3yWAHS2V5cT7os");

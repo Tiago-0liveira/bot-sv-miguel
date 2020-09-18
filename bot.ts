@@ -38,4 +38,4 @@ client.on("message", async (msg: Discord.Message) => {
 	}
 });
 
-client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.n1CgrnDvNpJ51AESONSZuuRwPmk");
+client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.xBw13ZN7CWz9G3yWAHS2V5cT7os");
