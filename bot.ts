@@ -26,11 +26,10 @@ client.on("message", async (msg: Discord.Message) => {
 		if (!isMuting && msg.channel.id === "756649778481463326") {
 			isMuting = true;
 			const channel = msg.guild.channels.cache.find((c) => {
-				console.log(String(c.id) === baseChannelId);
 				return String(c.id) === baseChannelId;
 			});
 			for (let member in channel.members) {
-				await channel.members[member].voice.setMute(!muted);
+				channel.members[member].voice.setMute(!muted);
 			}
 			muted = !muted;
 			isMuting = false;
