@@ -46,7 +46,7 @@ client.on("ready", function () {
     console.log("Logged in as " + client.user.tag + "!");
 });
 client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, function () {
-    var channel, member;
+    var channel;
     return __generator(this, function (_a) {
         if (!msg.content.startsWith(prefix) || msg.author.bot) {
             return [2 /*return*/];
@@ -64,11 +64,10 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
             if (!isMuting && msg.channel.id === "756649778481463326") {
                 isMuting = true;
                 channel = msg.guild.channels.cache.find(function (c) {
+                    console.log(String(c.id) === baseChannelId);
                     return String(c.id) === baseChannelId;
                 });
-                for (member in channel.members) {
-                    channel.members[member].voice.setMute(!muted);
-                }
+                channel.members.map(function (member) { return member.voice.setMute(!muted); });
                 muted = !muted;
                 isMuting = false;
             }
