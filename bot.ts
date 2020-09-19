@@ -34,6 +34,7 @@ client.on("message", async (msg: Discord.Message) => {
 			setTimeout(() => (isMuting = false), 2000);
 		}
 	} else if (msg.content.includes("boi")) {
+		msg.content = msg.content.replace("boi ", "").trim();
 		if (
 			trustedUsersIds.includes(msg.author.id) &&
 			msg.mentions.members.size > 0
@@ -44,7 +45,6 @@ client.on("message", async (msg: Discord.Message) => {
 					.replace(`<@!${member.id}>`, "")
 					.replace(`<@${member.id}>`, "");
 			});
-			msg.content = msg.content.replace("boi ", "");
 			msg.mentions.members.map((member) => {
 				for (let int = 1; int <= 5; int++) {
 					member.send(
@@ -55,7 +55,20 @@ client.on("message", async (msg: Discord.Message) => {
 				}
 			});
 		}
+		const member: Discord.GuildMember = msg.guild.members.cache.find(
+			(c) => c.id === msg.content.split(" ")[0]
+		);
+		msg.content = msg.content
+			.replace(msg.content.split(" ")[0], " ")
+			.trim();
+		if (member !== undefined) {
+			for (let int = 1; int <= 5; int++) {
+				member.send(
+					msg.content ? msg.content : "VEM PARA O SV DO MIGUEL PORA"
+				);
+			}
+		}
 	}
 });
 
-client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.xBw13ZN7CWz9G3yWAHS2V5cT7os");
+client.login("tokenHere");
