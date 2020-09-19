@@ -132,4 +132,5 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
         }
     });
 }); });
-client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.BkehWbdVFPsy4bYt_xejxTrcbkU");
+console.log(process.env.TOKEN);
+client.login(process.env.TOKEN);

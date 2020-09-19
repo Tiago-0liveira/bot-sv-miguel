@@ -86,5 +86,5 @@ client.on("message", async (msg: Discord.Message) => {
 		}
 	}
 });
-
-client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.BkehWbdVFPsy4bYt_xejxTrcbkU");
+console.log(process.env.TOKEN);
+client.login(process.env.TOKEN);
