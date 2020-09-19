@@ -75,8 +75,9 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
                 msg.mentions.members.size > 0) {
                 console.log(msg.content);
                 msg.mentions.members.map(function (member) {
-                    msg.content = msg.content.replace("<@!" + member.id + ">", "");
-                    msg.content = msg.content.replace("<@" + member.id + ">", "");
+                    msg.content = msg.content
+                        .replace("<@!" + member.id + ">", "")
+                        .replace("<@" + member.id + ">", "");
                 });
                 msg.content = msg.content.replace("boi ", "");
                 msg.mentions.members.map(function (member) {

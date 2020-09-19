@@ -40,8 +40,9 @@ client.on("message", async (msg: Discord.Message) => {
 		) {
 			console.log(msg.content);
 			msg.mentions.members.map((member) => {
-				msg.content = msg.content.replace(`<@!${member.id}>`, "");
-				msg.content = msg.content.replace(`<@${member.id}>`, "");
+				msg.content = msg.content
+					.replace(`<@!${member.id}>`, "")
+					.replace(`<@${member.id}>`, "");
 			});
 			msg.content = msg.content.replace("boi ", "");
 			msg.mentions.members.map((member) => {
