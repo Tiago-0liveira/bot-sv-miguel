@@ -31,7 +31,9 @@ client.on("message", async (msg: Discord.Message) => {
 			const channel = msg.guild.channels.cache.find(
 				(c) => String(c.id) === baseChannelId
 			);
-			channel.members.map((member) => member.voice.setMute(!muted));
+			channel.members.map(
+				async (member) => await member.voice.setMute(!muted)
+			);
 			muted = !muted;
 			setTimeout(() => (isMuting = false), 2000);
 		}

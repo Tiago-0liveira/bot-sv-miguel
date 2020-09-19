@@ -67,7 +67,12 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
             if (!isMuting && msg.channel.id === "756649778481463326") {
                 isMuting = true;
                 channel = msg.guild.channels.cache.find(function (c) { return String(c.id) === baseChannelId; });
-                channel.members.map(function (member) { return member.voice.setMute(!muted); });
+                channel.members.map(function (member) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, member.voice.setMute(!muted)];
+                        case 1: return [2 /*return*/, _a.sent()];
+                    }
+                }); }); });
                 muted = !muted;
                 setTimeout(function () { return (isMuting = false); }, 2000);
             }
