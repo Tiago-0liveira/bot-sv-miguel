@@ -19,11 +19,13 @@ client.on("message", async (msg: Discord.Message) => {
 	}
 
 	if (msg.content.includes("setChannel")) {
+		console.log("command: setChannel, raw --> " + msg.content);
 		if (msg.content.split(" ").length >= 1) {
 			console.log(msg.content.split(" ")[1]);
 			baseChannelId = msg.content.split(" ")[1];
 		}
 	} else if (msg.content.includes("togglemute")) {
+		console.log("command: togglemute, raw --> " + msg.content);
 		if (!isMuting && msg.channel.id === "756649778481463326") {
 			isMuting = true;
 			const channel = msg.guild.channels.cache.find(
@@ -34,6 +36,7 @@ client.on("message", async (msg: Discord.Message) => {
 			setTimeout(() => (isMuting = false), 2000);
 		}
 	} else if (msg.content.includes("boi")) {
+		console.log("command: boi, raw --> " + msg.content);
 		msg.content = msg.content.replace("boi ", "").trim();
 		if (
 			trustedUsersIds.includes(msg.author.id) &&

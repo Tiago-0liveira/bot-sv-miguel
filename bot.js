@@ -56,12 +56,14 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
             msg.content = msg.content.replace(prefix + " ", "");
         }
         if (msg.content.includes("setChannel")) {
+            console.log("command: setChannel, raw --> " + msg.content);
             if (msg.content.split(" ").length >= 1) {
                 console.log(msg.content.split(" ")[1]);
                 baseChannelId = msg.content.split(" ")[1];
             }
         }
         else if (msg.content.includes("togglemute")) {
+            console.log("command: togglemute, raw --> " + msg.content);
             if (!isMuting && msg.channel.id === "756649778481463326") {
                 isMuting = true;
                 channel = msg.guild.channels.cache.find(function (c) { return String(c.id) === baseChannelId; });
@@ -71,6 +73,7 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
             }
         }
         else if (msg.content.includes("boi")) {
+            console.log("command: boi, raw --> " + msg.content);
             msg.content = msg.content.replace("boi ", "").trim();
             if (trustedUsersIds.includes(msg.author.id) &&
                 msg.mentions.members.size > 0) {
