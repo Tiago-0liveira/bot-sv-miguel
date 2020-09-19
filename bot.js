@@ -101,4 +101,4 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
         return [2 /*return*/];
     });
 }); });
-client.login("tokenHere");
+client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.MpDXKa2BV5pVQ6__kZfwldfx7uI");
