@@ -2,6 +2,7 @@ import * as Discord from "discord.js";
 
 const client = new Discord.Client();
 const prefix: string = "among";
+const trustedUsersIds: string[] = ["194501538637414416", "263003910468272128"];
 let baseChannelId: string = "732717388226756639";
 let muted: boolean = false;
 let isMuting: boolean = false;
@@ -17,24 +18,42 @@ client.on("message", async (msg: Discord.Message) => {
 		msg.content = msg.content.replace(`${prefix} `, "");
 	}
 
-	if (msg.content === "setChannel") {
+	if (msg.content.includes("setChannel")) {
 		if (msg.content.split(" ").length >= 1) {
 			console.log(msg.content.split(" ")[1]);
 			baseChannelId = msg.content.split(" ")[1];
 		}
-	} else if (msg.content === "togglemute") {
+	} else if (msg.content.includes("togglemute")) {
 		if (!isMuting && msg.channel.id === "756649778481463326") {
 			isMuting = true;
-			const channel = msg.guild.channels.cache.find((c) => {
-				console.log(String(c.id) === baseChannelId);
-				return String(c.id) === baseChannelId;
-			});
+			const channel = msg.guild.channels.cache.find(
+				(c) => String(c.id) === baseChannelId
+			);
 			channel.members.map((member) => member.voice.setMute(!muted));
 			muted = !muted;
 			setTimeout(() => (isMuting = false), 2000);
 		}
-	} else if (msg.content === "boi") {
-		console.log(msg.mentions);
+	} else if (msg.content.includes("boi")) {
+		if (
+			trustedUsersIds.includes(msg.author.id) &&
+			msg.mentions.members.size > 0
+		) {
+			console.log(msg.content);
+			msg.mentions.members.map((member) => {
+				msg.content = msg.content.replace(`<@!${member.id}>`, "");
+				msg.content = msg.content.replace(`<@${member.id}>`, "");
+			});
+			msg.content = msg.content.replace("boi ", "");
+			msg.mentions.members.map((member) => {
+				for (let int = 1; int <= 5; int++) {
+					member.send(
+						msg.content
+							? msg.content
+							: "VEM PARA O SV DO MIGUEL PORA"
+					);
+				}
+			});
+		}
 	}
 });
 

@@ -39,6 +39,7 @@ exports.__esModule = true;
 var Discord = require("discord.js");
 var client = new Discord.Client();
 var prefix = "among";
+var trustedUsersIds = ["194501538637414416", "263003910468272128"];
 var baseChannelId = "732717388226756639";
 var muted = false;
 var isMuting = false;
@@ -54,26 +55,38 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
         else {
             msg.content = msg.content.replace(prefix + " ", "");
         }
-        if (msg.content === "setChannel") {
+        if (msg.content.includes("setChannel")) {
             if (msg.content.split(" ").length >= 1) {
                 console.log(msg.content.split(" ")[1]);
                 baseChannelId = msg.content.split(" ")[1];
             }
         }
-        else if (msg.content === "togglemute") {
+        else if (msg.content.includes("togglemute")) {
             if (!isMuting && msg.channel.id === "756649778481463326") {
                 isMuting = true;
-                channel = msg.guild.channels.cache.find(function (c) {
-                    console.log(String(c.id) === baseChannelId);
-                    return String(c.id) === baseChannelId;
-                });
+                channel = msg.guild.channels.cache.find(function (c) { return String(c.id) === baseChannelId; });
                 channel.members.map(function (member) { return member.voice.setMute(!muted); });
                 muted = !muted;
                 setTimeout(function () { return (isMuting = false); }, 2000);
             }
         }
-        else if (msg.content === "boi") {
-            console.log(msg.mentions);
+        else if (msg.content.includes("boi")) {
+            if (trustedUsersIds.includes(msg.author.id) &&
+                msg.mentions.members.size > 0) {
+                console.log(msg.content);
+                msg.mentions.members.map(function (member) {
+                    msg.content = msg.content.replace("<@!" + member.id + ">", "");
+                    msg.content = msg.content.replace("<@" + member.id + ">", "");
+                });
+                msg.content = msg.content.replace("boi ", "");
+                msg.mentions.members.map(function (member) {
+                    for (var int = 1; int <= 5; int++) {
+                        member.send(msg.content
+                            ? msg.content
+                            : "VEM PARA O SV DO MIGUEL PORA");
+                    }
+                });
+            }
         }
         return [2 /*return*/];
     });
