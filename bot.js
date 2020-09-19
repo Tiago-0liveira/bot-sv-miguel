@@ -47,66 +47,89 @@ client.on("ready", function () {
     console.log("Logged in as " + client.user.tag + "!");
 });
 client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, function () {
-    var channel, member, int;
+    var channel, member, int, fetched, error_1;
     return __generator(this, function (_a) {
-        if (!msg.content.startsWith(prefix) || msg.author.bot) {
-            return [2 /*return*/];
-        }
-        else {
-            msg.content = msg.content.replace(prefix + " ", "");
-        }
-        if (msg.content.includes("setChannel")) {
-            console.log("command: setChannel, raw --> " + msg.content);
-            if (msg.content.split(" ").length >= 1) {
-                console.log(msg.content.split(" ")[1]);
-                baseChannelId = msg.content.split(" ")[1];
-            }
-        }
-        else if (msg.content.includes("togglemute")) {
-            console.log("command: togglemute, raw --> " + msg.content);
-            if (!isMuting && msg.channel.id === "756649778481463326") {
-                isMuting = true;
-                channel = msg.guild.channels.cache.find(function (c) { return String(c.id) === baseChannelId; });
-                channel.members.map(function (member) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, member.voice.setMute(!muted)];
-                        case 1: return [2 /*return*/, _a.sent()];
-                    }
-                }); }); });
-                muted = !muted;
-                setTimeout(function () { return (isMuting = false); }, 2000);
-            }
-        }
-        else if (msg.content.includes("boi")) {
-            console.log("command: boi, raw --> " + msg.content);
-            msg.content = msg.content.replace("boi ", "").trim();
-            if (trustedUsersIds.includes(msg.author.id) &&
-                msg.mentions.members.size > 0) {
-                console.log(msg.content);
-                msg.mentions.members.map(function (member) {
-                    msg.content = msg.content
-                        .replace("<@!" + member.id + ">", "")
-                        .replace("<@" + member.id + ">", "");
-                });
-                msg.mentions.members.map(function (member) {
-                    for (var int = 1; int <= 5; int++) {
-                        member.send(msg.content
-                            ? msg.content
-                            : "VEM PARA O SV DO MIGUEL PORA");
-                    }
-                });
-            }
-            member = msg.guild.members.cache.find(function (c) { return c.id === msg.content.split(" ")[0]; });
-            msg.content = msg.content
-                .replace(msg.content.split(" ")[0], " ")
-                .trim();
-            if (member !== undefined) {
-                for (int = 1; int <= 5; int++) {
-                    member.send(msg.content ? msg.content : "VEM PARA O SV DO MIGUEL PORA");
+        switch (_a.label) {
+            case 0:
+                if (!msg.content.startsWith(prefix) || msg.author.bot) {
+                    return [2 /*return*/];
                 }
-            }
+                else {
+                    msg.content = msg.content.replace(prefix + " ", "");
+                }
+                if (!msg.content.includes("setChannel")) return [3 /*break*/, 1];
+                console.log("command: setChannel, raw --> " + msg.content);
+                if (msg.content.split(" ").length >= 1) {
+                    console.log(msg.content.split(" ")[1]);
+                    baseChannelId = msg.content.split(" ")[1];
+                }
+                return [3 /*break*/, 9];
+            case 1:
+                if (!msg.content.includes("togglemute")) return [3 /*break*/, 2];
+                console.log("command: togglemute, raw --> " + msg.content);
+                if (!isMuting && msg.channel.id === "756649778481463326") {
+                    isMuting = true;
+                    channel = msg.guild.channels.cache.find(function (c) { return String(c.id) === baseChannelId; });
+                    channel.members.map(function (member) { return member.voice.setMute(!muted); });
+                    muted = !muted;
+                    setTimeout(function () { return (isMuting = false); }, 2000);
+                }
+                return [3 /*break*/, 9];
+            case 2:
+                if (!msg.content.includes("boi")) return [3 /*break*/, 3];
+                console.log("command: boi, raw --> " + msg.content);
+                msg.content = msg.content.replace("boi ", "").trim();
+                if (trustedUsersIds.includes(msg.author.id) &&
+                    msg.mentions.members.size > 0) {
+                    console.log(msg.content);
+                    msg.mentions.members.map(function (member) {
+                        msg.content = msg.content
+                            .replace("<@!" + member.id + ">", "")
+                            .replace("<@" + member.id + ">", "");
+                    });
+                    msg.mentions.members.map(function (member) {
+                        for (var int = 1; int <= 5; int++) {
+                            member.send(msg.content
+                                ? msg.content
+                                : "VEM PARA O SV DO MIGUEL PORA");
+                        }
+                    });
+                }
+                member = msg.guild.members.cache.find(function (c) { return c.id === msg.content.split(" ")[0]; });
+                msg.content = msg.content
+                    .replace(msg.content.split(" ")[0], " ")
+                    .trim();
+                if (member !== undefined) {
+                    for (int = 1; int <= 5; int++) {
+                        member.send(msg.content ? msg.content : "VEM PARA O SV DO MIGUEL PORA");
+                    }
+                }
+                return [3 /*break*/, 9];
+            case 3:
+                if (!msg.content.includes("cleanchat")) return [3 /*break*/, 9];
+                console.log("command: cleanchat, raw --> " + msg.content);
+                msg.content = msg.content.replace("cleanchat ", "").trim();
+                fetched = void 0;
+                _a.label = 4;
+            case 4:
+                _a.trys.push([4, 6, 8, 9]);
+                return [4 /*yield*/, msg.channel.messages.fetch({
+                        limit: Number(msg.content)
+                    })];
+            case 5:
+                fetched = _a.sent();
+                return [3 /*break*/, 9];
+            case 6:
+                error_1 = _a.sent();
+                return [4 /*yield*/, msg.channel.messages.fetch({ limit: 20 })];
+            case 7:
+                fetched = _a.sent();
+                return [3 /*break*/, 9];
+            case 8:
+                fetched.map(function (message) { return message.deletable && message["delete"](); });
+                return [7 /*endfinally*/];
+            case 9: return [2 /*return*/];
         }
-        return [2 /*return*/];
     });
 }); });
-client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.MpDXKa2BV5pVQ6__kZfwldfx7uI");
+client.login("tokenHere");

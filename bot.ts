@@ -28,12 +28,10 @@ client.on("message", async (msg: Discord.Message) => {
 		console.log("command: togglemute, raw --> " + msg.content);
 		if (!isMuting && msg.channel.id === "756649778481463326") {
 			isMuting = true;
-			const channel = msg.guild.channels.cache.find(
+			const channel: Discord.GuildChannel = msg.guild.channels.cache.find(
 				(c) => String(c.id) === baseChannelId
 			);
-			channel.members.map(
-				async (member) => await member.voice.setMute(!muted)
-			);
+			channel.members.map((member) => member.voice.setMute(!muted));
 			muted = !muted;
 			setTimeout(() => (isMuting = false), 2000);
 		}
@@ -73,7 +71,20 @@ client.on("message", async (msg: Discord.Message) => {
 				);
 			}
 		}
+	} else if (msg.content.includes("cleanchat")) {
+		console.log("command: cleanchat, raw --> " + msg.content);
+		msg.content = msg.content.replace("cleanchat ", "").trim();
+		let fetched: Discord.Collection<string, Discord.Message>;
+		try {
+			fetched = await msg.channel.messages.fetch({
+				limit: Number(msg.content),
+			});
+		} catch (error) {
+			fetched = await msg.channel.messages.fetch({ limit: 20 });
+		} finally {
+			fetched.map((message) => message.deletable && message.delete());
+		}
 	}
 });
 
-client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.MpDXKa2BV5pVQ6__kZfwldfx7uI");
+client.login("tokenHere");
