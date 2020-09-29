@@ -37,6 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var Discord = require("discord.js");
+var dotenv = require("dotenv");
+dotenv.config();
 var client = new Discord.Client();
 var prefix = "among";
 var trustedUsersIds = ["194501538637414416", "263003910468272128"];
@@ -202,4 +204,4 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
         }
     });
 }); });
-client.login("Token Here");
+client.login(process.env.TOKEN);
