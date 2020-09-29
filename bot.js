@@ -81,7 +81,7 @@ client.on("ready", function () { return __awaiter(void 0, void 0, void 0, functi
     });
 }); });
 client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, function () {
-    var embed, memberTiago, member, int, fetched, error_1, timeout_1, timer, lastChannel;
+    var embed, memberTiago, member, int, fetched, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -107,7 +107,7 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
                 if (msg.content.split(" ").length >= 1) {
                     baseChannelId = msg.content.split(" ")[1];
                 }
-                return [3 /*break*/, 13];
+                return [3 /*break*/, 9];
             case 1:
                 if (!msg.content.includes("togglemute")) return [3 /*break*/, 2];
                 console.log("command: togglemute, raw --> " + msg.content);
@@ -119,7 +119,7 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
                     muted = !muted;
                     setTimeout(function () { return (isMuting = false); }, 2000);
                 }
-                return [3 /*break*/, 13];
+                return [3 /*break*/, 9];
             case 2:
                 if (!msg.content.includes("boi")) return [3 /*break*/, 3];
                 console.log("command: boi, raw --> " + msg.content);
@@ -172,9 +172,9 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
                         member.send(msg.content ? msg.content : "VEM PARA O SV DO MIGUEL PORA");
                     }
                 }
-                return [3 /*break*/, 13];
+                return [3 /*break*/, 9];
             case 3:
-                if (!msg.content.includes("cleanchat")) return [3 /*break*/, 10];
+                if (!msg.content.includes("cleanchat")) return [3 /*break*/, 9];
                 console.log("command: cleanchat, raw --> " + msg.content);
                 msg.content = msg.content.replace("cleanchat ", "").trim();
                 fetched = void 0;
@@ -198,27 +198,8 @@ client.on("message", function (msg) { return __awaiter(void 0, void 0, void 0, f
                     return message.deletable ? message["delete"]() : "";
                 });
                 return [7 /*endfinally*/];
-            case 9: return [3 /*break*/, 13];
-            case 10:
-                if (!msg.content.includes("move")) return [3 /*break*/, 13];
-                console.log("command: move, raw --> " + msg.content);
-                msg.content = msg.content.replace("cleanchat ", "").trim();
-                timeout_1 = 500;
-                timer = 5000;
-                lastChannel = void 0;
-                _a.label = 11;
-            case 11:
-                if (!(timer > 0)) return [3 /*break*/, 13];
-                return [4 /*yield*/, new Promise(function (r) { return setTimeout(r, timeout_1); })];
-            case 12:
-                _a.sent();
-                msg.mentions.members.map(function (member) {
-                    /* member.voice.setChannel(getMemberChannel(member)); */
-                });
-                timer -= timeout_1;
-                return [3 /*break*/, 11];
-            case 13: return [2 /*return*/];
+            case 9: return [2 /*return*/];
         }
     });
 }); });
-client.login("NzIyNDU2OTkwNTA0NDUyMTM3.XujWgQ.BkehWbdVFPsy4bYt_xejxTrcbkU");
+client.login("Token Here");
