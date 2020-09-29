@@ -4,14 +4,24 @@
 	"description": "",
 	"main": "bot.js",
 	"scripts": {
-		"start": "node bot.js"
+		"start": "nodemon bot.js",
+		"tsc": "tsc --watch bot.ts",
+		"build": "webpack --mode production"
 	},
-	"author": "",
+	"author": "tiagoo",
 	"license": "ISC",
 	"dependencies": {
 		"@types/node": "^14.11.1",
 		"discord.js": "^12.3.1",
+		"fs": "0.0.1-security",
 		"nodemon": "^2.0.4",
-		"process": "^0.11.10"
+		"process": "^0.11.10",
+		"ts-node": "^9.0.0",
+		"webpack": "^4.44.2",
+		"webpack-cli": "^3.3.12"
+	},
+	"devDependencies": {
+		"ts-loader": "^8.0.4",
+		"typescript": "^4.0.3"
 	}
 }
