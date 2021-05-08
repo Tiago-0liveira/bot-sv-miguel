@@ -1,9 +1,12 @@
 {
-	"compilerOptions": {
-		"outDir": "./dist/",
-		"module": "es6",
-		"target": "es5",
-		"allowJs": true,
-		"moduleResolution": "node"
-	}
+    "compilerOptions": {
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+    },
+    "exclude": [
+        "node_modules",
+        "**/*spec.ts"
+    ], "include": [
+        "src/**/*"
+    ]
 }
