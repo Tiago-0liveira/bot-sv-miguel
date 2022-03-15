@@ -192,6 +192,37 @@ Commands.registerCommand(new Command(["watch"], "watch", "watches someone (impos
 		MembersToWatch.push(member_id)
 	}
 }))
+
+Commands.registerCommand(new Command(["ban"], "ban", "ban's someone", "among ban <member_id>", true, async (
+	message,author, member, mentions, g
+) => {
+	const SplittedContent = message.content.split(" ")
+	if (SplittedContent.length < 3) {
+		const embed = new MessageEmbed()
+			.addField("Error", "format -> among ban <member_id>")
+			.setColor("#FF4119")
+		return author.send(embed)
+	}
+	const id = SplittedContent[2]
+	const memberToBan = await g.members.fetch(id)
+	if (memberToBan) {
+		memberToBan.ban()
+	} else {
+		const embed = new MessageEmbed()
+			.addField("Error", `No member with ${id} id found!`)
+			.setColor("#FF4119")
+		author.send(embed)
+	}
+}))
+
+Commands.registerCommand(new Command(["persistServerMute, psm"], "persistServerMute", "make's it impossible to de-activate the server mute", "among psm <member_id>", true, (
+	message, author, member, Mentions, Guild
+) => {
+	const SplittedContent = message.content.split(" ")
+	
+
+	
+}))
 Commands.registerCommand(new Command(["commands", "help"], "help", "shows all commands", "among help/commands", true, (
 	_, author
 ) => {
